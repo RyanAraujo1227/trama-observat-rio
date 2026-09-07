@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRAMA — Observatório de IA e Mercado de Trabalho</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+ <div class="brand" onclick="go('overview')">TRAMA<small>Observatório de IA e Mercado de Trabalho</small></div>
+ <nav>
+  <button class="nav active" data-page="overview">Visão geral</button>
+  <button class="nav" data-page="explore">Explorar profissões</button>
+  <button class="nav" data-page="compare">Comparar</button>
+  <button class="nav" data-page="about">Sobre o estudo</button>
+ </nav>
+</header>
+
+<main>
+<section id="overview" class="page on">
+ <div class="intro">
+  <div><span class="eyebrow">EMPREGOS FORMAIS 2019–2024 + EXPOSIÇÃO À IA</span>
+  <h1>Como profissões mais expostas à IA estão evoluindo no Brasil?</h1>
+  <p>O Trabalho.AI cruza emprego formal brasileiro com indicadores internacionais de exposição à IA generativa para tornar essa transformação mais fácil de entender.</p></div>
+  <div class="heroactions">
+      <button class="primary" onclick="go('explore')">Explorar uma profissão →</button>
+      <button class="secondary" onclick="document.querySelector('#glossary').scrollIntoView({behavior:'smooth'})">Entender as siglas</button>
+    </div>
+ </div>
+
+ <div class="notice"><b>Principal resultado da amostra</b><span>Maior exposição à GenAI esteve associada a menor crescimento dos vínculos formais. Isso é uma associação estatística — não significa que a IA causou redução de empregos.</span></div>
+
+ <div class="kpis">
+  <article><span>Profissões analisadas</span><b>30</b><small>ocupações brasileiras</small></article>
+  <article><span>Período analisado</span><b>2019–2024</b><small>6 anos da RAIS</small></article>
+  <article class="focus"><span>Correlação encontrada</span><b>−0,57</b><small>exposição × crescimento</small></article>
+  <article><span>Significância</span><b>p = 0,001</b><small>na amostra analisada</small></article>
+ </div>
+
+ <div class="grid2">
+  <article class="panel">
+   <div class="panelhead"><div><span class="eyebrow">RESULTADO PRINCIPAL</span><h2>Exposição à IA × crescimento do emprego</h2></div><span class="help" title="Cada ponto representa uma profissão.">?</span></div>
+   <p class="sub">Cada círculo representa uma profissão. Mais à direita = maior exposição à GenAI. Mais acima = maior crescimento dos vínculos.</p>
+   <div id="scatter" class="scatter"></div>
+   <div class="legendline"><span>Menor exposição</span><span>Maior exposição →</span></div>
+  </article>
+  <article class="panel explain">
+   <span class="eyebrow">COMO LER</span><h2>O que encontramos?</h2>
+   <div class="finding"><b>1</b><p>As profissões mais expostas tiveram, em média, crescimento menor no período.</p></div>
+   <div class="finding"><b>2</b><p>Isso não acontece com todas: tecnologia e RH, por exemplo, cresceram bastante.</p></div>
+   <div class="finding"><b>3</b><p>Por isso, exposição à IA não pode ser interpretada como “risco de perder o emprego”.</p></div>
+   <button class="secondary" onclick="go('about')">Entender a metodologia</button>
+  </article>
+ </div>
+
+ <div class="sectionhead"><div><span class="eyebrow">EXEMPLOS</span><h2>Veja como algumas profissões mudaram</h2></div><button class="link" onclick="go('explore')">Ver todas →</button></div>
+ <div id="featured" class="featured"></div>
+
+ <div id="glossary" class="glossary panel">
+  <div class="panelhead"><div><span class="eyebrow">GUIA RÁPIDO</span><h2>O que significam as siglas?</h2></div></div>
+  <p class="sub">Essas classificações ajudam a conectar os dados brasileiros ao indicador internacional de exposição à IA.</p>
+  <div class="glossarygrid">
+   <article><b>RAIS</b><span>Relação Anual de Informações Sociais</span><p>Base brasileira utilizada para analisar vínculos formais e remuneração das ocupações.</p></article>
+   <article><b>CBO</b><span>Classificação Brasileira de Ocupações</span><p>Código utilizado no Brasil para identificar e organizar as diferentes ocupações.</p></article>
+   <article><b>ISCO-08</b><span>International Standard Classification of Occupations</span><p>Classificação internacional utilizada para relacionar as ocupações brasileiras ao indicador de exposição.</p></article>
+   <article><b>OIT</b><span>Organização Internacional do Trabalho</span><p>Organização responsável pelo indicador de exposição ocupacional à IA generativa utilizado na análise.</p></article>
+   <article><b>IPCA</b><span>Índice Nacional de Preços ao Consumidor Amplo</span><p>Índice usado para tornar comparáveis, em valores de 2024, as remunerações de diferentes anos.</p></article>
+   <article><b>GenAI</b><span>Inteligência Artificial Generativa</span><p>Tecnologias capazes de gerar conteúdos como textos, imagens ou código a partir de instruções.</p></article>
+  </div>
+ </div>
+
+</section>
+
+<section id="explore" class="page">
+ <div class="pagehead"><span class="eyebrow">EXPLORAR</span><h1>Encontre uma profissão</h1><p>Busque pelo nome ou CBO e veja emprego, remuneração e exposição à IA.</p></div>
+ <div class="filters"><input id="search" placeholder="Ex.: Contador, Enfermeiro ou 252210"><select id="filter"><option value="">Todos os níveis de exposição</option><option>Gradient 4</option><option>Gradient 3</option><option>Gradient 2</option><option>Gradient 1</option><option>Minimal Exposure</option><option>Not Exposed</option></select></div>
+ <div id="cards" class="cards"></div>
+</section>
+
+<section id="detail" class="page">
+ <button class="back" onclick="go('explore')">← Voltar às profissões</button><div id="detailbox"></div>
+</section>
+
+<section id="compare" class="page">
+ <div class="pagehead"><span class="eyebrow">COMPARAR</span><h1>Compare duas profissões</h1><p>Veja lado a lado como exposição, vínculos e remuneração se comportam.</p></div>
+ <div class="comparepick"><select id="cmp1"></select><span>×</span><select id="cmp2"></select><button class="primary" onclick="compareNow()">Comparar</button></div>
+ <div id="comparebox"></div>
+</section>
+
+<section id="about" class="page">
+ <div class="pagehead"><span class="eyebrow">SOBRE O ESTUDO</span><h1>De onde vêm os dados?</h1><p>A metodologia foi organizada para separar o que foi observado do que pode ser interpretado.</p></div>
+ <div class="steps">
+  <article><b>1</b><div><h3>Mercado de trabalho — RAIS</h3><p>A Relação Anual de Informações Sociais (RAIS) fornece vínculos formais e remuneração por CBO entre 2019 e 2024.</p></div></article>
+  <article><b>2</b><div><h3>Correspondência ocupacional — CBO e ISCO-08</h3><p>As ocupações da Classificação Brasileira de Ocupações (CBO) são associadas à classificação internacional ISCO-08.</p></div></article>
+  <article><b>3</b><div><h3>Exposição à IA generativa — OIT</h3><p>O índice da Organização Internacional do Trabalho (OIT) de 2025 informa o potencial de exposição das tarefas de cada ocupação.</p></div></article>
+  <article><b>4</b><div><h3>Remuneração comparável — IPCA</h3><p>Os valores históricos são corrigidos pelo Índice Nacional de Preços ao Consumidor Amplo (IPCA) para reais de 2024.</p></div></article>
+  <article><b>5</b><div><h3>Análise</h3><p>Comparamos crescimento dos vínculos e score de exposição sem assumir relação causal.</p></div></article>
+ </div>
+ <div class="methodnote"><h3>⚠ O que o resultado não diz</h3><p>O índice da OIT mede <b>exposição potencial das tarefas</b>. Uma profissão exposta pode crescer, diminuir ou mudar de composição. A correlação encontrada não demonstra que a IA causou as variações observadas.</p></div>
+</section>
+</main>
+<footer>TRAMA — Observatório de IA e Mercado de Trabalho</footer>
+<script src="/static/app.js"></script>
+</body></html>
